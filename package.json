@@ -28,9 +28,9 @@
     "build": "tsdx build",
     "lint": "tsdx lint",
     "pub": "tsdx build && np",
+    "run": "npx -p . todo-multi-user --slow",
     "start": "tsdx watch",
-    "test": "tsdx test --passWithNoTests",
-    "run": "npx -p . todo-multi-user --slow"
+    "test": "tsdx test --passWithNoTests"
   },
   "husky": {
     "hooks": {
@@ -72,5 +72,9 @@
   },
   "engines": {
     "node": ">=10"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
   }
 }
