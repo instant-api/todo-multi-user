@@ -1,0 +1,76 @@
+{
+  "name": "@instant-api/todo-multi-user",
+  "version": "0.0.0",
+  "description": "> A CLI to create a small Todo List API",
+  "homepage": "https://github.com/instant-api/todo-multi-user#readme",
+  "bugs": {
+    "url": "https://github.com/instant-api/todo-multi-user/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/instant-api/todo-multi-user.git"
+  },
+  "license": "MIT",
+  "author": "Etienne Dldc",
+  "main": "dist/index.js",
+  "module": "dist/todo-multi-user.esm.js",
+  "typings": "dist/index.d.ts",
+  "bin": {
+    "todo-multi-user": "bin/index.js"
+  },
+  "files": [
+    "dist",
+    "bin",
+    "README.md",
+    "api.html"
+  ],
+  "scripts": {
+    "build": "tsdx build",
+    "lint": "tsdx lint",
+    "pub": "tsdx build && np",
+    "start": "tsdx watch",
+    "test": "tsdx test --passWithNoTests",
+    "run": "npx -p . todo-multi-user --slow"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "tsdx lint"
+    }
+  },
+  "prettier": {
+    "printWidth": 80,
+    "semi": true,
+    "singleQuote": true,
+    "trailingComma": "es5"
+  },
+  "dependencies": {
+    "@types/bcrypt": "^3.0.0",
+    "arg": "^5.0.0",
+    "bcrypt": "^5.0.0",
+    "cuid": "^2.1.8",
+    "express-graphql": "^0.12.0",
+    "fs-extra": "^9.0.1",
+    "get-port": "^5.1.1",
+    "graphql": "^15.4.0",
+    "inquirer": "^7.3.3",
+    "runtypes": "^5.0.1",
+    "tumau": "^1.0.0-alpha.84",
+    "uid": "^2.0.0",
+    "zod": "^1.11.11"
+  },
+  "devDependencies": {
+    "@types/fs-extra": "^9.0.4",
+    "@types/inquirer": "^7.3.1",
+    "@types/jest": "^26.0.15",
+    "@types/yup": "^0.29.9",
+    "husky": "^4.3.0",
+    "np": "^7.0.0",
+    "prettier": "2.2.1",
+    "tsdx": "^0.14.1",
+    "tslib": "^2.0.3",
+    "typescript": "^4.1.2"
+  },
+  "engines": {
+    "node": ">=10"
+  }
+}
