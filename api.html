@@ -3,30 +3,80 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Instant Todo List API</title>
+    <title>Instant Multi User Todo List API</title>
+    <style>
+      code {
+        background: #b3e5fc;
+        border-radius: 4px;
+        display: inline-block;
+        padding: 0 5px;
+        font-size: 0.9em;
+      }
+
+      pre {
+        line-height: 1.5;
+        font-size: 1rem;
+      }
+
+      h3 {
+        margin: 0;
+        font-size: 1rem;
+      }
+    </style>
   </head>
   <body>
-    <pre style="line-height: 1.5">
-<h3 style="margin: 0" >Instant Todo List API</h3>
+    <pre>
+<h3>Instant Multi User Todo List API</h3>
 <b>GET <a href="/">/</a></b>
 - Return this page
 
-<b>GET <a href="/todos">/todos</a></b>
-- Return an array of all the todos [{ id: "", name: "", done: false }, {...}, ...] 
+<b>GET <a href="/me">/me</a></b>
+- Require an <code>Authenticated</code> header of <code>Bearer TOKEN</code>
+- Return the me object: <code>{ id, name, username, token }</code>
 
-<b>POST <a href="/todo">/todo</a></b>
-Create a Todo
-- Body { name: "", done: true } or { name: "" }
-- Return the created Todo { id: "", name: "", done: false }
+<b>GET <a href="/lists">/lists</a></b>
+List all the todo lists the user has access to
+- Require an <code>Authenticated</code> header of <code>Bearer TOKEN</code>
+- Return a list of todo list: <code>[{ id: "", name: "", userIds: ["", "", ...] }, ...]</code>
 
-<b>PUT <a href="/todo/qr0u1q1">/todo/[id]</a></b>
-Update a Todo
-- Body { name: "", done: false } (both properties are optional)
-- Return the updated todo
+<b>POST <a href="/action/signup">/action/signup</a></b>
+Signup to create a new account
+- Body <code>{ name: "", username: "", password: "" }</code> (all properties are required)
+  - <code>password</code> must be at least 6 characters
+  - <code>username</code> must be at least 3 characters and only contains letters, numbers, <code>-</code> and <code>_</code>
+- Return an object with the token of the created user: <code>{ token: "" }</code>
 
-<b>DELETE <a href="/todo/qr0u1q1">/todo/[id]</a></b>
-Delete a Todo
-- Return an empty response
+<b>POST <a href="/action/login">/action/login</a></b>
+Login using <code>username</code> and <code>password</code>
+- Body <code>{ username: "", password: "" }</code> (all properties are required)
+- Return an object with the token of the user: <code>{ token: "" }</code>
+
+<b>POST <a href="/action/create-list">/action/create-list</a></b>
+Create a new Todo List
+- Require an <code>Authenticated</code> header of <code>Bearer TOKEN</code>
+- Body <code>{ name: "" }</code> (<code>name</code> is required and must have at least 1 character)
+- Return an object with the id of the created list: <code>{ id: "" }</code>
+
+<b>POST <a href="/action/add-todo">/action/add-todo</a></b>
+Add a todo to an existing list
+- Require an <code>Authenticated</code> header of <code>Bearer TOKEN</code>
+- Body <code>{ listId: "", name: "", done: true }</code> (<code>done</code> is optional)
+  - <code>name</code> must have at least 1 character 
+  - <code>listId</code> must be a valid list id 
+- Return an object with the id of the created todo: <code>{ id: "" }</code>
+
+<b>POST <a href="/action/set-todo-done">/action/set-todo-done</a></b>
+Set the <code>done</code> property of a todo
+- Require an <code>Authenticated</code> header of <code>Bearer TOKEN</code>
+- Body <code>{ listId: "", todoId: "", done: true }</code> (all properties are required)
+- Return an object with the id of the created todo: <code>{ id: "" }</code>
+
+<b>POST <a href="/action/invite">/action/set-todo-done</a></b>
+Invite a user to give him acces to a todo list
+- Require an <code>Authenticated</code> header of <code>Bearer TOKEN</code>
+- Body <code>{ listId: "", username: "" }</code> (all properties are required)
+- Return a 204 (No Content) response
+
     </pre>
   </body>
 </html>

@@ -156,7 +156,7 @@ export async function insertTodo(
   listId: string,
   name: string,
   done: boolean
-): Promise<void> {
+): Promise<Todo> {
   const data = await read(file);
   const list = await userCanAccessList(data, listId, userId);
   if (!list) {
@@ -169,6 +169,7 @@ export async function insertTodo(
   };
   list.todos.push(todo);
   await write(file, data);
+  return todo;
 }
 
 export async function setTodoDone(
@@ -177,7 +178,7 @@ export async function setTodoDone(
   listId: string,
   todoId: string,
   done: boolean
-): Promise<void> {
+): Promise<Todo> {
   const data = await read(file);
   const list = await userCanAccessList(data, listId, userId);
   if (!list) {
@@ -188,10 +189,11 @@ export async function setTodoDone(
     throw new HttpError.BadRequest(`Invalid Todo ID`);
   }
   if (todo.done === done) {
-    return;
+    return todo;
   }
   todo.done = done;
   await write(file, data);
+  return todo;
 }
 
 export async function inviteUser(

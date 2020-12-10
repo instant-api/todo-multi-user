@@ -17,9 +17,10 @@ export const ROUTES = {
         name: z.string(),
         username: z
           .string()
+          .min(3)
           .regex(
             /[A-Za-z0-9_-]+/,
-            'Must only conatins letter, digit, "-" and "_"'
+            'Must only contains letter, digit, "-" and "_"'
           ),
         password: z.string().min(6),
       })
@@ -33,14 +34,14 @@ export const ROUTES = {
   },
   createList: {
     path: Chemin.create('action', 'create-list'),
-    body: ZodValidator(z.object({ name: z.string() })),
+    body: ZodValidator(z.object({ name: z.string().min(1) })),
   },
   addTodo: {
     path: Chemin.create('action', 'add-todo'),
     body: ZodValidator(
       z.object({
         listId: ZodCuidSlug,
-        name: z.string(),
+        name: z.string().min(1),
         done: z.boolean().optional(),
       })
     ),

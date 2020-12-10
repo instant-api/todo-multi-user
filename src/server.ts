@@ -141,8 +141,14 @@ export function createServer(
             const { name, listId, done = false } = ROUTES.addTodo.body.getValue(
               ctx
             );
-            await insertTodo(filePath, user.id, listId, name, done);
-            return JsonResponse.noContent();
+            const todo = await insertTodo(
+              filePath,
+              user.id,
+              listId,
+              name,
+              done
+            );
+            return JsonResponse.withJson({ id: todo.id });
           }
         ),
         Route.POST(
@@ -154,8 +160,14 @@ export function createServer(
             const { listId, todoId, done } = ROUTES.setTodoDone.body.getValue(
               ctx
             );
-            await setTodoDone(filePath, user.id, listId, todoId, done);
-            return JsonResponse.noContent();
+            const todo = await setTodoDone(
+              filePath,
+              user.id,
+              listId,
+              todoId,
+              done
+            );
+            return JsonResponse.withJson({ id: todo.id });
           }
         ),
         Route.POST(
