@@ -13,7 +13,7 @@ Hi ! I'm Etienne, you can [follow me on Twitter](https://twitter.com/Etienne_dot
 ## Usage
 
 ```bash
-npx @instant-api/todo-list
+npx @instant-api/todo-multi-user
 ```
 
 Once the server is up, open the url in the browser to get the list of routes !
