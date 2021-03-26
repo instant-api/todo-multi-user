@@ -15,6 +15,7 @@ import {
   HttpErrorToJsonResponse,
   JsonParser,
   Middleware,
+  StringBodyParser,
 } from 'tumau';
 import {
   findListForUser,
@@ -54,6 +55,7 @@ export function createServer(
       ErrorToHttpError,
       InvalidResponseToHttpError,
       AuthMiddleware(filePath),
+      StringBodyParser(),
       JsonParser(),
       WaitMiddleware,
       RouterPackage([
