@@ -1,7 +1,10 @@
 import { createContext, HttpError, Middleware, RequestConsumer } from 'tumau';
 import { User, findUserByToken } from './db';
 
-const AuthContext = createContext<User | null>(null);
+const AuthContext = createContext<User | null>({
+  name: 'Auth',
+  defaultValue: null,
+});
 
 export const AuthConsumer = AuthContext.Consumer;
 
