@@ -31,12 +31,12 @@
 - Return this page
 
 <b>GET <a href="/me">/me</a></b>
-- Require an <code>Authenticated</code> header of <code>Bearer TOKEN</code>
+- Require an <code>Authorization</code> header of <code>Bearer TOKEN</code>
 - Return the me object: <code>{ id, name, username, token }</code>
 
 <b>GET <a href="/lists">/lists</a></b>
 List all the todo lists the user has access to
-- Require an <code>Authenticated</code> header of <code>Bearer TOKEN</code>
+- Require an <code>Authorization</code> header of <code>Bearer TOKEN</code>
 - Return a list of todo list: <code>[{ id: "", name: "", userIds: ["", "", ...] }, ...]</code>
 
 <b>POST <a href="/action/signup">/action/signup</a></b>
@@ -53,13 +53,13 @@ Login using <code>username</code> and <code>password</code>
 
 <b>POST <a href="/action/create-list">/action/create-list</a></b>
 Create a new Todo List
-- Require an <code>Authenticated</code> header of <code>Bearer TOKEN</code>
+- Require an <code>Authorization</code> header of <code>Bearer TOKEN</code>
 - Body <code>{ name: "" }</code> (<code>name</code> is required and must have at least 1 character)
 - Return an object with the id of the created list: <code>{ id: "" }</code>
 
 <b>POST <a href="/action/add-todo">/action/add-todo</a></b>
 Add a todo to an existing list
-- Require an <code>Authenticated</code> header of <code>Bearer TOKEN</code>
+- Require an <code>Authorization</code> header of <code>Bearer TOKEN</code>
 - Body <code>{ listId: "", name: "", done: true }</code> (<code>done</code> is optional)
   - <code>name</code> must have at least 1 character 
   - <code>listId</code> must be a valid list id 
@@ -67,13 +67,13 @@ Add a todo to an existing list
 
 <b>POST <a href="/action/set-todo-done">/action/set-todo-done</a></b>
 Set the <code>done</code> property of a todo
-- Require an <code>Authenticated</code> header of <code>Bearer TOKEN</code>
+- Require an <code>Authorization</code> header of <code>Bearer TOKEN</code>
 - Body <code>{ listId: "", todoId: "", done: true }</code> (all properties are required)
 - Return an object with the id of the created todo: <code>{ id: "" }</code>
 
 <b>POST <a href="/action/invite">/action/set-todo-done</a></b>
 Invite a user to give him acces to a todo list
-- Require an <code>Authenticated</code> header of <code>Bearer TOKEN</code>
+- Require an <code>Authorization</code> header of <code>Bearer TOKEN</code>
 - Body <code>{ listId: "", username: "" }</code> (all properties are required)
 - Return a 204 (No Content) response
 
